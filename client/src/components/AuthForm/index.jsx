@@ -4,12 +4,12 @@ import Signup from './Form/Signup';
 import FormToggler from './FormToggler/FormToggler';
 import './index.scss';
 
-export default function AuthForm(props) {
+export default function AuthForm({ handleLogin, handleSignup }) {
   const [isLoginActive, setIsLoginActive] = useState(true);
 
   const togglerRef = useRef(null);
 
-  const current = isLoginActive ? 'Signup' : 'Login';
+  const current = isLoginActive ? 'Sign Up' : 'Log In';
 
   const toggleForm = () => {
     if (isLoginActive) {
@@ -28,7 +28,13 @@ export default function AuthForm(props) {
 
   return (
     <div className="auth-from">
-      <div className="auth-from__content">{isLoginActive ? <Login /> : <Signup />}</div>
+      <div className="auth-from__content">
+        {isLoginActive ? (
+          <Login handleLogin={handleLogin} />
+        ) : (
+          <Signup handleSignup={handleSignup} />
+        )}
+      </div>
       <FormToggler current={current} ref={togglerRef} onClick={toggleForm} />
     </div>
   );
