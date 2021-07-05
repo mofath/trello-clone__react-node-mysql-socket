@@ -1,5 +1,8 @@
-const { CorsMiddleware } = require("./corsMiddleware");
+const { corsMiddleware } = require("./corsMiddleware");
+const { verifyTokens } = require("./authMiddleware");
+
 
 module.exports = {
-    CorsMiddleware,
+    corsMiddleware,
+    verifyTokens
 }

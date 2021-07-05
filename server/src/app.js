@@ -1,5 +1,5 @@
 const express = require('express');
-const { CorsMiddleware } = require("./middlewares");
+const { corsMiddleware } = require("./middlewares");
 
 const app = express();
 
@@ -9,6 +9,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Handle CORS
-app.use(CorsMiddleware);
+app.use(corsMiddleware);
 
 module.exports = app;
