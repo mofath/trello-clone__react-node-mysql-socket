@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const getConfig = require('../utils/getConfig');
+const getConfig = require('../utils/getDBConfig');
 
 const config = getConfig();
 
