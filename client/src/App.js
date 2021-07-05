@@ -1,13 +1,15 @@
 import React from 'react';
-import AuthForm from './AuthForm';
-import './App.css';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { LandingScreen } from './screens';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <AuthForm />
-    </div>
-  );
+    <BrowserRouter >
+      <Switch>
+        <Route path="/" exact component={LandingScreen} />
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
 export default App;
