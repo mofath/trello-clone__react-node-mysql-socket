@@ -26,6 +26,14 @@ module.exports = {
         type: Sequelize.ENUM('todo', 'in-progress', 'testing', 'done', 'paid'),
         defaultValue: 'todo',
       },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
     });
   },
 

@@ -1,7 +1,5 @@
 'use strict';
 
-'use strict';
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return Promise.all([
@@ -15,7 +13,8 @@ module.exports = {
           onUpdate: 'CASCADE',
           onDelete: 'SET NULL',
           defaultValue: null, after: 'id'
-        }),
+        }
+        ),
     ]);
   },
 
