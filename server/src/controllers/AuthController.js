@@ -1,6 +1,5 @@
 const { AuthService } = require('../services');
 const jwtUtils = require('../utils/jwt');
-const config = require('../config/config');
 
 
 async function create(req, res, next) {
@@ -13,7 +12,7 @@ async function create(req, res, next) {
         });
 
     } catch (err) {
-        throw new Error(err.message);
+        next(new Error);
     }
 }
 
@@ -34,7 +33,7 @@ async function login(req, res, next) {
         });
 
     } catch (error) {
-        next(new Error)
+        next(new Error);
     }
 };
 
