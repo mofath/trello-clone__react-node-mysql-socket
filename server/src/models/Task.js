@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 	const Task = sequelize.define(
-		'task',
+		'tasks',
 		{
 			id: {
 				type: DataTypes.UUID,
@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 				defaultValue: DataTypes.UUIDV4,
 			},
 			user_id: {
-				allowNull: false,
+				allowNull: true,
 				type: DataTypes.UUID,
 				references: {
 					model: 'user',
@@ -34,7 +34,12 @@ module.exports = (sequelize, DataTypes) => {
 				defaultValue: 'todo',
 			},
 		},
-		{},
+		{
+			sequelize,
+			freezeTableName: true,
+			modelName: 'users',
+			timestamps: true
+		},
 	);
 
 	Task.associate = (models) => {
