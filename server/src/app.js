@@ -12,4 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 // Handle CORS
 app.use(corsMiddleware);
 
+// Handle routes
+app.use(api)
+
 module.exports = app;
