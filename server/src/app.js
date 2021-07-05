@@ -1,5 +1,6 @@
 const express = require('express');
-const { corsMiddleware } = require("./middlewares");
+const { corsMiddleware } = require('./middlewares');
+const api = require('./routes')
 
 const app = express();
 
