@@ -1,0 +1,67 @@
+
+.add-task-form-wrapper {
+  width: 500px;
+  max-width: 80%;
+  margin: 0 auto;
+  position: relative;
+  background: #f9f9f9;
+  padding: 25px;
+  margin: 50px 0;
+}
+
+.add-task-form__header {
+  display: block;
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.add-task-form__group {
+  border: medium none;
+  margin: 0 0 10px;
+  min-width: 100%;
+  padding: 0;
+  width: 100%;
+}
+
+.add-task-form input[type='text'],
+.add-task-form input[type='number'],
+.add-task-form textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  background: #fff;
+  margin: 0 0 5px;
+  padding: 10px;
+}
+
+.add-task-form input[type='text']:hover,
+.add-task-form input[type='number']:hover,
+.add-task-form textarea:hover {
+  border: 1px solid #aaa;
+}
+
+.add-task-form input[type='text']:active,
+.add-task-form input[type='number']:active,
+.add-task-form textarea:active,
+.add-task-form input[type='text']:focus,
+.add-task-form input[type='number']:focus,
+.add-task-form textarea:focus {
+  outline: none;
+}
+
+.add-task-form textarea {
+  height: 100px;
+  max-width: 100%;
+  resize: none;
+}
+
+.add-task-form input[type='submit'] {
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  margin: 0 0 5px;
+  padding: 10px;
+  font-size: 15px;
+}
