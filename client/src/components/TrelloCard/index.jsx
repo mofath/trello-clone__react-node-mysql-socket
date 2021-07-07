@@ -2,12 +2,11 @@ import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import './index.scss';
 
-export default function TrelloCard({ text, title, index, id }) {
+export default function TrelloCard({ title, text, index, id, listID }) {
   return (
-    <Draggable draggableId={'card_' + id} index={index}>
+    <Draggable draggableId={id} index={index} className="trello-card__draggable">
       {(provided) => (
         <div
-          draggableId={text}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
