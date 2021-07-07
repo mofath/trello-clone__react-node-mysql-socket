@@ -10,8 +10,8 @@ const AuthService = (httpClient) => {
         return data;
     };
 
-    const authenticate = async (loginData) => {
-        const { data } = await httpClient.get('http://localhost:3001/api/v1/auth/token', loginData);
+    const authenticate = async () => {
+        const { data } = await httpClient.get('/api/v1/auth');
         return data;
     };
 

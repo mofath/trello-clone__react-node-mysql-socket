@@ -1,25 +1,40 @@
-const AuthService = (httpClient) => {
+const TaskService = (httpClient) => {
 
     const getAllTasks = async () => {
-        const { data } = await httpClient.get('http://localhost:3001/api/v1/task');
-        return data;
+        try {
+            const { data } = await httpClient.get('http://localhost:3001/api/v1/task');
+            return data;
+        } catch (error) {
+            console.log(error.message);
+            alert("Something went wrong")
+        }
     };
 
     const updateTask = async (taskData) => {
-        const { data } = await httpClient.post('http://localhost:3001/api/v1/task', taskData);
-        return data;
+        try {
+            const { data } = await httpClient.patch('http://localhost:3001/api/v1/task', taskData);
+            return data;
+        } catch (error) {
+            console.log(error.message);
+            alert("Something went wrong");
+        }
     };
 
-    const AddTask = async (task) => {
-        const { data } = await httpClient.get('/auth/token', task);
-        return data;
+    const addTask = async (task) => {
+        try {
+            const { data } = await httpClient.post('http://localhost:3001/api/v1/task', task);
+            return data;
+        } catch (error) {
+            console.log(error.message);
+            alert("Something went wrong");
+        }
     };
 
     return Object.freeze({
         getAllTasks,
         updateTask,
-        AddTask
+        addTask
     });
 };
 
-export default AuthService;
+export default TaskService;
