@@ -1,7 +1,7 @@
 const db = require('../../models');
 
 async function getAll() {
-  console.log('Task Service: findAll');
+  console.log('Task Service: getAll');
 
   try {
     const tasks = await db.Task.findAll();
