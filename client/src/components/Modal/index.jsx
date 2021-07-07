@@ -12,7 +12,7 @@ const Modal = (props) => (
         opacity: props.show ? '1' : '0',
       }}
     >
-      <span class="modal__close-btn">&times;</span>
+      <span className="modal__close-btn" onClick={props.closeModal}>&times;</span>
       {props.children}
     </div>
   </Backdrop>
