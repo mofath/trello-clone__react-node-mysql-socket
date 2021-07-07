@@ -1,12 +1,12 @@
 const db = require('../../models');
 
 async function updateTaskStatus(id, status) {
-  console.log('Auth Service: updateTaskStatus');
+  console.log('Task Service: updateTaskStatus');
 
   try {
     await db.Task.update(
       { status: status },
-      { where: { _id: id } }
+      { where: { id: id } }
     )
   } catch (error) {
     console.log('Something went wrong: Service: task.updateTaskStatus', error);
