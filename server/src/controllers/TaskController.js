@@ -1,17 +1,17 @@
 const { TaskService } = require('../services');
-
-
+const { Error500 } = require('../exceptions');
 
 async function create(req, res, next) {
     try {
-        await TaskService.create(req.body);
-
+        const task = await TaskService.create(req.body);
+        
         res.status(201).json({
             success: true,
+            task
         });
 
-    } catch (err) {
-        throw new Error(err.message);
+    } catch (error) {
+        next(new Error500(error.message))
     }
 }
 
@@ -24,8 +24,8 @@ async function getAll(req, res, next) {
             tasks,
         });
 
-    } catch (err) {
-        throw new Error(err);
+    } catch (error) {
+        next(new Error500(error.message))
     }
 };
 
@@ -38,8 +38,8 @@ async function updateStatus(req, res, next) {
             success: true,
         });
 
-    } catch (err) {
-        throw new Error(err);
+    } catch (error) {
+        next(new Error500(error.message))
     }
 };
 
