@@ -1,4 +1,4 @@
-exports.Httpstatus = Object.freeze({
+exports.HttpStatusCode = Object.freeze({
     CONTINUE: { status: 100, code: "Continue" },
     SWITCHING_PROTOCOLS: { status: 101, code: "Switching Protocols" },
     OK: { status: 200, code: "OK" },
