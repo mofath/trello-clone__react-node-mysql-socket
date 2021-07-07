@@ -1,7 +1,7 @@
 export default function filterTasks(tasks) {
     return [
         {
-            title: 'Todo',
+            title: 'ToDo',
             id: "todo",
             tasks: tasks.filter((item) =>
                 item.status === 'todo'
