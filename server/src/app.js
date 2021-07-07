@@ -1,4 +1,5 @@
 const express = require('express');
+var cookieParser = require('cookie-parser')
 const api = require('./routes')
 const {
     corsMiddleware,
@@ -11,10 +12,13 @@ const app = express();
 // Handle CORS
 app.use(corsMiddleware);
 
+app.use(cookieParser());
+
 // parse json request body
 app.use(express.json());
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }));
+// parse cookies
 
 // Handle routes
 app.use(api)
