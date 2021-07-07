@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AuthForm } from '../../components';
-import services from '../../services';
+// import services from '../../services';
+import { useActions } from '../../hooks/useAction';
 import { useHistory } from 'react-router';
+import { useSelector } from 'react-redux';
 import './index.scss';
 
 function LandingScreen() {
   const history = useHistory();
+  const { login, signup } = useActions();
+  const authReducer = useSelector((state) => state.auth);
+  const { isAuthenticated, isLoading } = authReducer;
+
+  useEffect(() => {
+    if (isAuthenticated && !isLoading) history.replace('/home');
+  }, [isAuthenticated, history, isLoading]);
 
   const handleLogin = async (username, password) => {
     try {
-      const data = await services().authService.login({ username, password });
-      alert(data.message);
+      login({ username, password });
+      alert(`Hello, ${username}`);
       history.replace('/home');
     } catch (err) {
       alert('Something went wrong');
@@ -20,9 +29,11 @@ function LandingScreen() {
 
   const handleSignup = async (username, password) => {
     try {
-      const data = await services().authService.signup({ username, password });
-      console.log(data);
+      signup({ username, password });
+      alert(`Hello, ${username}! Account Created!`);
+      history.replace('/home');
     } catch (err) {
+      alert('Something went wrong');
       console.log(err);
     }
   };
