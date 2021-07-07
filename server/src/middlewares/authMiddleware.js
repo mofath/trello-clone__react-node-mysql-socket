@@ -1,30 +1,38 @@
-const jwtUtils = require('../utils/jwt');
-const { AuthService } = require('../services')
+const { AuthService } = require('../services');
+const { HttpError } = require('../exceptions');
+const { HttpStatusCode } = require('../constants')
 
-exports.verifyTokens = async(req, res, next) => {
-    const accessToken = req.cookies["access_token"];
+exports.requireAuthMiddleware = async (req, res, next) => {
+    try {
+        const accessToken = req.cookies["access_token"];
+        const refreshToken = req.cookies["refresh_token"];
 
-    if (accessToken) {
-        try {
-            req.user = jwtUtils.verifyAccessToken(accessToken);
-            return res.status(200);
-        }
-        catch (err) {
+        console.log(refreshToken);
+        console.log(accessToken);
 
-            const refreshToken = req.cookies["refresh_token"];
 
-            if (!refreshToken) {
-                return res.status(401).json("Unauthorized");
-            }
+        if (!accessToken || !refreshToken) throw new Error('Unauthorized');
 
-            const { newToken, newRefreshToken, user } = await AuthService.refreshTokens(refreshToken);
+        const {
+            newAccessToken,
+            newRefreshToken,
+            user
+        } = await AuthService.verifyTokens(refreshToken, refreshToken);
 
-            if (newToken && newRefreshToken) {
-                res.cookie('access_token', newToken, { httpOnly: true, sameSite: true });
-                res.cookie('refresh_token', newRefreshToken, { httpOnly: true, sameSite: true });
-                req.user = user;
-            }
-        }
+        if (!newAccessToken && !newRefreshToken) throw new Error('Unauthorized');
+
+        res.cookie('access_token', newAccessToken, { httpOnly: true, sameSite: true });
+        res.cookie('refresh_token', newRefreshToken, { httpOnly: true, sameSite: true });
+        req.user = user;
+
+        next();
     }
-    next();
-};
+    catch (error) {
+        throw new HttpError(
+            HttpStatusCode.FORBIDDEN.status,
+            HttpStatusCode.FORBIDDEN.code,
+            error.message
+        )
+    }
+}
+
