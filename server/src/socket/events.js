@@ -1,11 +1,16 @@
+const eventNames = require('./event_names');
+
 module.exports = (io) => {
 
-    io.on('connection', (socket) => {
+    io.on(eventNames.CONNECTION, (socket) => {
         console.log('New connection', socket.id);
 
-        socket.on('addTask', (task) => {
-            console.log(222222222222222222222222222);
-            // console.log('socketData: ' + JSON.stringify(task));
+        socket.on(eventNames.ADD_TASK, (task) => {
+            console.log('socketData: ' + JSON.stringify(task));
+        });
+
+        socket.on(eventNames.UPDATE_TASK, (data) => {
+            console.log('socketData: ' + JSON.stringify(data));
         });
     });
 }
