@@ -3,9 +3,9 @@ import { Droppable } from 'react-beautiful-dnd';
 import TrelloCard from '../TrelloCard';
 import './index.scss';
 
-export default function TrelloList({ title, cards = [], id }) {
+export default function TrelloList({ title, cards = [], id, allowedToDrop }) {
   return (
-    <Droppable droppableId={title.toLowerCase()}>
+    <Droppable droppableId={title.toLowerCase()} isDropDisabled={allowedToDrop}>
       {(provided) => (
         <div
           {...provided.droppableProps}
@@ -13,8 +13,7 @@ export default function TrelloList({ title, cards = [], id }) {
           className="trello-list"
         >
           <h4 className="trello-list__title">{title}</h4>
-          {
-            cards?.length > 0 ?
+          {cards?.length > 0 ? (
             cards.map((card, index) => (
               <TrelloCard
                 title={card.title}
@@ -25,11 +24,11 @@ export default function TrelloList({ title, cards = [], id }) {
                 key={card.id}
               />
             ))
-            :
+          ) : (
             <div className="trello-list__empty-indicator">
               List has no cards
             </div>
-          }
+          )}
           {provided.placeholder}
         </div>
       )}
