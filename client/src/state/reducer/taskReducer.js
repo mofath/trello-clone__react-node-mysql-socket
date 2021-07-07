@@ -27,42 +27,41 @@ const reducer = (state = INITIAL_STATE, action) => {
                 error: action.payload,
             };
 
-
         case ActionType.GET_TASKS_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 error: null,
-                tasks: [...state.tasks, action.payload.newTask]
+                tasks: action.payload
             };
 
+        case ActionType.ADD_TASK_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                tasks: [...state.tasks, action.payload]
+            };
 
         case ActionType.UPDATE_TASK_SUCCESS:
-            const {
-                droppableIdStart,
-                droppableIdEnd,
-                droppableIdxStart,
-                droppableIdxEnd,
-                draggableId
-            } = action.payload;
+            const { srcId, destId, srcIdx, destIdx, cardId } = action.payload;
 
-            // in the same list
-            if(droppableIdStart === droppableIdEnd) {
-                const list = state.find(list =>droppableIdStart === list.id)
-                const card = list.cards.splice(droppableIdxStart, 1);
-                list.cards.splice(droppableIdxEnd, 0, ...card)
+            // TODO: reorder cards in the same list
+            if (srcId === destId) {
+                console.log(srcIdx, destIdx);
+                return state;
             }
 
             return {
                 ...state,
-                task: state.tasks.map((task, idx) => {
-                    if (idx === action.payload.idx)
+                tasks: state.tasks.map((task) => {
+                    if (task.id === cardId) {
                         return {
-                            ...task, status: action.payload.newStatus
+                            ...task, status: destId
                         }
+                    }
                     return task;
-                }),
-                selectedAns: null
+                })
             };
 
         default:
