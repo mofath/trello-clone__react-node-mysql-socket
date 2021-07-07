@@ -14,6 +14,10 @@ const Http = function () {
         return axios.put(url, body);
     };
 
+    const patch = async (url, body) => {
+        return axios.patch(url, body);
+    };
+
     const _delete = async (url) => {
         return axios.delete(url);
     };
@@ -22,6 +26,7 @@ const Http = function () {
         get,
         post,
         put,
+        patch,
         delete: _delete,
     });
 };
