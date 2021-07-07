@@ -5,12 +5,15 @@ import { SocketContext } from '../../socket';
 import { useActions } from '../../hooks/useAction';
 import { useSelector } from 'react-redux';
 import { AddTaskForm, Modal, TrelloList } from '../../components';
+import { authUtils } from '../../utils';
 import './index.scss';
 
 const Dashboard = () => {
   const [showForm, setShowForm] = useState(false);
+
   const { addTask, getTasks, updateTask } = useActions();
-  const { tasks } = useSelector((state) => state['task']);
+  const { tasks } = useSelector((state) => state.task);
+  const { role, isAuthenticated } = useSelector((state) => state.auth);
   const { socket } = useContext(SocketContext);
 
   const openForm = () => setShowForm(true);
@@ -47,6 +50,11 @@ const Dashboard = () => {
                 cards={list.tasks}
                 key={list.id}
                 id={list.id}
+                allowedToDrop={authUtils.allowedToDrop(
+                  list.id,
+                  role,
+                  isAuthenticated
+                )}
               />
             ))}
           </div>
